@@ -1,5 +1,5 @@
 # Disclaimer
-This is a test repo for a new implementation. For documentation use main PH5 repo https://github.com/PIC-IRIS/PH5.
+This is a test repo for a new documentation implementation. For current documentation use main PH5 repo https://github.com/PIC-IRIS/PH5.
 
 # Example
 
