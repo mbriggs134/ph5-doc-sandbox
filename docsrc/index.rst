@@ -20,7 +20,8 @@ Maps_g
 ======
 An additional index used by segd and segy files
 
-.. TODO maybe reference Receivers_g/Das_g_XXXXX/index_t instead of
+.. TODO maybe reference Receivers_g/Das_g_XXXXX/index_t instead of having
+    them separate.
 
 index_t
 -------
@@ -181,3 +182,12 @@ title_s
 :Type: String
 :Range: Limited to 64 characters
 :Description: Title of report stored in PH5.
+
+*******************
+Field Relationships
+*******************
+
+.. image:: field-relations-filled.svg
+    :target: _images/field-relations-filled.svg
+
+.. include:: field_relations.rst

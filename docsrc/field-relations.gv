@@ -1,0 +1,93 @@
+// Use ./gv_var_proc.py to translate python format vars
+// Use https://dreampuf.github.io/GraphvizOnline/ to create svg
+// #edge_minlen=3
+// #edge_penwidth=5
+// #node_fontsize=18
+
+// FIXME Das_t has time_t reference
+digraph G {
+    layout=fdp; // layout alg (note overrides cmd args)
+    penwidth=3; // controls rectangle width
+    splines=curved; // Control how edges are createtd
+
+    fontcolor=red;
+    fontsize=18;
+    outputorder="edgesfirst";
+
+    compound=true;
+    subgraph cluster_Time_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Time_t.implied_index";
+        label = "Receivers_g.Time_t";
+        color=blue;
+    }
+    subgraph cluster_Receiver_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Receiver_t.implied_index";
+        label = "Receivers_g.Receiver_t";
+        color=blue;
+    }
+    subgraph cluster_Response_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Response_t.n_i";
+        label = "Response_g.Response_t";
+        color=blue
+    }
+    subgraph cluster_Event_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Event_t.id_s";
+        label = "Sorts_g.Event_t";
+        color=blue
+    }
+    subgraph cluster_Data_a {
+        node [style=filled fontsize={node_fontsize}];
+        "data";
+        label = "Receivers_g.Das_g_XXXXX.Data_a";
+        color=blue
+    }
+    subgraph cluster_Das_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Das_t.array_name_data_a";
+        "Das_t.receiver_table_n_i";
+        "Das_t.response_table_n_i";
+        "Das_t.time_table_n_i";
+        label = "Receivers_g.Das_g_XXXXX.Das_t";
+        color=blue
+    }
+    subgraph cluster_Array_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Array_t.receiver_table_n_i";
+        "Array_t.response_table_n_i";
+        label = "Array_t_XXX";
+        color=blue
+    }
+    subgraph cluster_Offset_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Offset_t.event_id_s";
+        label = "Sorts_g.Offset_t_XXX_YYY";
+        color=blue
+    }
+    subgraph cluster_Sort_t {
+        node [style=filled fontsize={node_fontsize}];
+        "Sort_t.array_t_name_s";
+//        "Sort_t.event_id_s"; Blank in example
+        label = "Sorts_g.Sort_t";
+        color=blue
+    }
+
+    // Cross table references
+    "Das_t.receiver_table_n_i" -> "Receiver_t.implied_index" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+    "Array_t.receiver_table_n_i" -> "Receiver_t.implied_index" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+
+    "Das_t.response_table_n_i" -> "Response_t.n_i" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+    "Array_t.response_table_n_i" -> "Response_t.n_i" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+
+    "Offset_t.event_id_s" -> "Event_t.id_s" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+//    "Sort_t.event_id_s" -> "Event_t.id_s" Blank in example
+
+    "Das_t.time_table_n_i" -> "Time_t.implied_index" [minlen={edge_minlen}, penwidth={edge_penwidth}];
+
+    // Note desintation node is a hack just pointing to cluster
+    "Sort_t.array_t_name_s" -> "Array_t.receiver_table_n_i" [lhead=cluster_Array_t minlen={edge_minlen}, penwidth={edge_penwidth}];
+    "Das_t.array_name_data_a" -> "data" [lhead=cluster_Data_a minlen={edge_minlen}, penwidth={edge_penwidth}];
+}

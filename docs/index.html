@@ -2907,6 +2907,83 @@ both das_t and array_xxx_t as response_table_n_i.</td>
 </div>
 </div>
 </div>
+<div class="section" id="field-relationships">
+<h2>Field Relationships<a class="headerlink" href="#field-relationships" title="Permalink to this headline">¶</a></h2>
+<a class="reference external image-reference" href="_images/field-relations-filled.svg"><img alt="_images/field-relations-filled.svg" src="_images/field-relations-filled.svg" /></a>
+<div class="section" id="experiment-group">
+<h3>Experiment group:<a class="headerlink" href="#experiment-group" title="Permalink to this headline">¶</a></h3>
+<p>This HDF5 group is the top level group for the file.  All other groups
+mentioned in subsequent sections are under this group.  There also exists an
+experiment table which contains general information on the experiment such as
+enumerating PIs and institutions involved.  The experiment table does not
+contain any direct references however it holds the northwest and southeast
+corners to define a rough geographic boundary of experiment data.</p>
+</div>
+<div class="section" id="receivers-group">
+<h3>Receivers group:<a class="headerlink" href="#receivers-group" title="Permalink to this headline">¶</a></h3>
+<p>This group holds the binary information from DAS units.  Within this group
+there are typically many individual DAS_g_XXXX (XXXX is serial number).  Within
+each DAS group data is further distributed into individual Data_a_XXXX arrays
+hold the time series or “waveform” data for a particular DAS can be found
+in DAS_g_XXXX.Das_t.  The Das_t table has the following references to other tables:</p>
+<blockquote>
+<div><ul class="simple">
+<li>DAS_g_XXXX.Das_t.array_name_data_a to a particular Data_a_XXXX</li>
+<li>DAS_g_XXXX.Das_t.receiver_table_n_i to Receivers_g.Receiver_t.(implied_index)</li>
+<li>DAS_g_XXXX.Das_t.response_table_n_i to Response_g.Response_t.n_i</li>
+</ul>
+</div></blockquote>
+<p>Additionally within the receivers group, three tables exist for additional data
+attributes.  First, DAS_g_XXXX.index_t references exactly which mini file each
+DASes information and provides start and end times of data if temporal sorting
+is desired.  Second, receiver_t holds orientation information that is
+referenced by Sorts_g.Array_t.receiver_table_n_i and
+DAS_g_XXXX.Das_t.receiver_table_n_i.  Thirdly, for DASes which do not auto
+correct clock time_t provides slope and offset for this purpose.</p>
+</div>
+<div class="section" id="maps-group">
+<h3>Maps group:<a class="headerlink" href="#maps-group" title="Permalink to this headline">¶</a></h3>
+<p>Additional tables are created when ingesting segd or segy files.  These tables
+are similar to Receiver group’s DAS_g_XXXX.index_t and references exactly which
+mini file each DASes information and provides start and end times of data if
+temporal sorting is desired.  These DAS_g_XXXX.index_t are listed in
+Maps_g.index_t so that each individual DAS can be referenced.</p>
+</div>
+<div class="section" id="reports-group">
+<h3>Reports group:<a class="headerlink" href="#reports-group" title="Permalink to this headline">¶</a></h3>
+<p>This group holds any reports related to the experiment.  There are no direct or
+explicit relations between this group and any other within the archive.</p>
+</div>
+<div class="section" id="responses-group">
+<h3>Responses group:<a class="headerlink" href="#responses-group" title="Permalink to this headline">¶</a></h3>
+<p>The response group contains response information for the sensor data logger
+combinations.  These responses are referenced by both sorts and receivers
+groups and these specific references are documented in those specific sections.</p>
+</div>
+<div class="section" id="sorts-group">
+<h3>Sorts group:<a class="headerlink" href="#sorts-group" title="Permalink to this headline">¶</a></h3>
+<p>This group is responsible for relating and providing references to arrays,
+events, and responses stored in all the other groups and tables.</p>
+<p><strong>Event_t</strong> lists the shot events time, location, and potentially magnitude the
+id_s is later referenced in Event_t_XXX tables.</p>
+<p><strong>Offset_t_XXX_XXX</strong> (Offset_t_array#_event#) are tables which describe angle
+and physical distance between array and events.</p>
+<p><strong>Sort_t</strong> table summarizes arrays versus times which allows one to further
+reference Array_t_XXX tables for more specifics.</p>
+<div class="section" id="id133">
+<h4>Array_t_XXX:<a class="headerlink" href="#id133" title="Permalink to this headline">¶</a></h4>
+<p>Is a logical grouping location, deploy times, and DAS / Sensor information.
+Each id represents a station. Each row is a different channel of a given
+sensor.  There are two key references to other tables:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Array_t.response_table_n_i points to Response_g.Response_t.n_i</li>
+<li>Array_t.receiver_table_n_i points to Receivers_g.Receiver_t.(implied_index)</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
 </div>
 
 
@@ -3229,6 +3306,18 @@ both das_t and array_xxx_t as response_table_n_i.</td>
 <li><a class="reference internal" href="#title-s">title_s</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#field-relationships">Field Relationships</a><ul>
+<li><a class="reference internal" href="#experiment-group">Experiment group:</a></li>
+<li><a class="reference internal" href="#receivers-group">Receivers group:</a></li>
+<li><a class="reference internal" href="#maps-group">Maps group:</a></li>
+<li><a class="reference internal" href="#reports-group">Reports group:</a></li>
+<li><a class="reference internal" href="#responses-group">Responses group:</a></li>
+<li><a class="reference internal" href="#sorts-group">Sorts group:</a><ul>
+<li><a class="reference internal" href="#id133">Array_t_XXX:</a></li>
 </ul>
 </li>
 </ul>

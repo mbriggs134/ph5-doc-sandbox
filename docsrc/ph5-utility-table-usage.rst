@@ -1,3 +1,0 @@
-tag_das_t
-:Usage: `125a2ph5.py:483 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/125a2ph5.py>`_, `1302ph5.py:690 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/1302ph5.py>`_, `grao2ph5.py:385 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/grao2ph5.py>`_, `obspytoph5.py:387 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/obspytoph5.py>`_, `seg2toph5.py:492 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/seg2toph5.py>`_, `segd2ph5.py:547 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/segd2ph5.py>`_, `segy2ph5.py:924 <https://github.com/PIC-IRIS/PH5/tree/master/ph5/utilities/segy2ph5.py>`_
-end_das_t_tag
