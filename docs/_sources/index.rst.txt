@@ -187,7 +187,7 @@ title_s
 Field Relationships
 *******************
 
-.. image:: field-relations-filled.svg
-    :target: _images/field-relations-filled.svg
+.. image:: field-relations.svg
+    :target: _images/field-relations.svg
 
 .. include:: field_relations.rst
